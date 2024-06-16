@@ -2,7 +2,7 @@ import cv2
 import numpy
 from mtcnn import MTCNN
 
-def recognise(file, directory):
+def recognise(file: str, directory: str):
     """The function takes a file as a paramenter. No return type, creates new files for recognised faces in gien directory
     
     Args: 
