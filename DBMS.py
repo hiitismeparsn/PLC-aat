@@ -11,7 +11,7 @@ def add_user_with_input(name, fac_emb):
     # Set data for the document using user input
     doc_ref.set({
         'name': name,
-        'Facial Embedding': fac_emb
+        'Facial Embedding': [fac_emb]
     })
     print("User added")
 
