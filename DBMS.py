@@ -20,14 +20,20 @@ def read_users():
     users_ref = db.collection('Facial Embedddings')
     docs = users_ref.stream()
     for doc in docs:
-        print(f'{doc.id} => {doc.to_dict()}')
+        return doc.to_dict()
 
 
 def get_facial_embeddings():
-    facial_embeddings_ref = db.collection('Facial Embedddings')
-    docs = facial_embeddings_ref.stream()
-    embeddings = {doc.id: doc.to_dict() for doc in docs}
-    return embeddings
+    users_ref = db.collection("Facial Embedddings")
+    docs = users_ref.stream()
+    for doc in docs:
+        val = doc.to_dict()
+        return val['Facial Embedding']
+
+
+
+
+
 
 
 # Function to print all attendance records
@@ -39,15 +45,6 @@ def print_attendance_records():
         print(f"{doc.id} => {doc.to_dict()}")
 
 # Function to convert string representation of embedding to list of floats
-def convert_embedding(embedding_str):
-    # Remove whitespace and brackets, then split by commas
-    embedding_list = embedding_str.replace('[', '').replace(']', '').split(',')
-    # Convert to list of floats
-    list = []
-    for num in embedding_list:
-        list.append(num)
-
-    return list
 
 
 
@@ -67,7 +64,7 @@ def mark_attendance(input_embedding, date):
             continue
 
         stored_embedding_str = data['Facial Embedding']
-        stored_embedding = convert_embedding(stored_embedding_str)
+        stored_embedding = emb.to_array(stored_embedding_str)
         print(stored_embedding)
         print(type(stored_embedding[0]))
           # Convert stored embedding to list of floats

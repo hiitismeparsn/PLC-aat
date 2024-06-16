@@ -26,6 +26,12 @@ def match(face1, face2, threshold):
     else:
         return False
 
+def to_array(embedding):
+    flattened = []
+    for i in range(len(embedding)):
+        for j in range(len(embedding[i])):  
+            flattened.append(float(embedding[i][j]))
+    return(flattened)
 
 
 
