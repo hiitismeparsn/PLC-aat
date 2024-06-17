@@ -17,18 +17,36 @@ Flow of program.
 """
 
 
-fileToMark = input("Enter the file you want to mark attendence for: ")
-date = input("Enter date of attendence: ")
-
-recognise_face.recognise(fileToMark, 'fdir')
-
-db.add_user_with_input("Halie",embeddings.to_array(ge.embeddings('fdir/face1.jpg')))
-db.add_user_with_input("Claire",embeddings.to_array(ge.embeddings('fdir/face2.jpg')))
-db.add_user_with_input("Alex",embeddings.to_array(ge.embeddings('fdir/face3.jpg')))
-db.add_user_with_input("Luke",embeddings.to_array(ge.embeddings('fdir/face4.jpg')))
-db.add_user_with_input("Phill",embeddings.to_array(ge.embeddings('fdir/face5.jpg')))
 
 
+# Capture the image and return the filename and date taken for future use
+try:
+    filename, date = recognise_face.capture_image('test')
 
-recognise_face.recognise(fileToMark, 'test')
-db.mark_attendance(ge.embeddings(fileToMark), date)
+except:
+    print("Fix ur webcam bro plz")   
+    raise Exception
+
+# Recognise faces from the captured image:
+recognise_face.recognise(filename, 'test')
+
+# Calculate embeddings and match all faces found with the databse 
+for face in os.listdir('test/'):
+    emb = embeddings.embeddings('test/image.jpg')
+    db.mark_attendance(emb, date)
+
+# fileToMark = input("Enter the file you want to mark attendence for: ")
+
+
+# recognise_face.recognise(fileToMark, 'fdir')
+
+# db.add_user_with_input("Halie",embeddings.to_array(ge.embeddings('fdir/face1.jpg')))
+# db.add_user_with_input("Claire",embeddings.to_array(ge.embeddings('fdir/face2.jpg')))
+# db.add_user_with_input("Alex",embeddings.to_array(ge.embeddings('fdir/face3.jpg')))
+# db.add_user_with_input("Luke",embeddings.to_array(ge.embeddings('fdir/face4.jpg')))
+# db.add_user_with_input("Phill",embeddings.to_array(ge.embeddings('fdir/face5.jpg')))
+
+
+
+# recognise_face.recognise(fileToMark, 'test')
+# db.mark_attendance(ge.embeddings(fileToMark), date)

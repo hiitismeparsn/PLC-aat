@@ -40,11 +40,6 @@ def get_facial_embeddings():
     return allEmbed
 
 
-
-
-
-
-
 # Function to print all attendance records
 def print_attendance_records():
     attendance_ref = db.collection('Attendance')
@@ -52,8 +47,6 @@ def print_attendance_records():
 
     for doc in docs:
         print(f"{doc.id} => {doc.to_dict()}")
-
-# Function to convert string representation of embedding to list of floats
 
 
 
@@ -83,12 +76,12 @@ def mark_attendance(input_embedding: list, date: str):
                 'date': date
                     
             })
-            print(f"Match found to: {data['name']}")
+            print(f"Match found to: {data['name']} and marked present for :{date}")
+            break
+    
+    print("No match was found after searching through the database for face")
     #print(f"Marked attendance for: {data['name']}, for {date}")
  
-
-
-
 
 
 # Use the service account key file
@@ -111,5 +104,4 @@ if not firebase_admin._apps:
     print("Firebase Admin SDK has been initialized.")
 else:
     print("Firebase Admin SDK is already initialized.")
-
 

@@ -1,5 +1,4 @@
 import numpy as np
-import generate_embeddings as gm
 from imgbeddings import imgbeddings
 from PIL import Image
 
@@ -35,6 +34,5 @@ def to_array(embedding: list):
         for j in range(len(embedding[i])):  
             flattened.append(float(embedding[i][j]))
     return(flattened)
-
 
 
